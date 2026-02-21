@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEXAA | Solutions Acoustiques Professionnelles</title>
+    <meta name="description" content="Réduisez la réverbération dans vos espaces professionnels. Solutions acoustiques textiles sur-mesure. Expertise française depuis 1987.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --red: #FF0000;
+            --red-dark: #CC0000;
+            --red-glow: rgba(255, 0, 0, 0.15);
+            --white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --black: #0A0A0A;
+            --gray-900: #141414;
+            --gray-800: #1F1F1F;
+            --gray-700: #333333;
+            --gray-600: #4A4A4A;
+            --gray-500: #6B6B6B;
+            --gray-400: #8C8C8C;
+            --gray-300: #B3B3B3;
+            --gray-200: #D9D9D9;
+            --gray-100: #F0F0F0;
+
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        /* ============================================
+           CURSOR FOLLOWER
+        ============================================ */
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: var(--red);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.15s var(--ease-out-expo), width 0.3s, height 0.3s;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower.hover {
+            width: 60px;
+            height: 60px;
+        }
+
+        /* ============================================
+           NAVIGATION
+        ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 32px;
+            letter-spacing: 0.1em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-phone {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: opacity 0.3s;
+        }
+
+        .nav-phone:hover {
+            opacity: 0.7;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: var(--white);
+            color: var(--red);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        /* ============================================
+           HERO - SPLIT DESIGN WITH IMAGE
+        ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+        }
+
+        .hero-left {
+            background: var(--red);
+            display: flex;
+            align-items: center;
+            padding: 120px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-left::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255,255,255,0.1) 50px, rgba(255,255,255,0.1) 51px),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255,255,255,0.1) 50px, rgba(255,255,255,0.1) 51px);
+        }
+
+        .hero-right {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://texaa.fr/wp-content/uploads/2021/02/Texaa-panneaux-acoustiques-Stereo_amenagement-salles-coworking-citywork_02-1200x1200.jpg');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.1);
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1.2); }
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, transparent 50%);
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: 48px;
+            right: 48px;
+            background: var(--white);
+            padding: 20px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 2;
+        }
+
+        .hero-badge-number {
+            font-family: var(--font-display);
+            font-size: 48px;
+            color: var(--red);
+            line-height: 1;
+        }
+
+        .hero-badge-text {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-700);
+        }
+
+        .hero-waves {
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .wave-ring {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: pulse 3s ease-out infinite;
+        }
+
+        .wave-ring:nth-child(1) { width: 100px; height: 100px; animation-delay: 0s; }
+        .wave-ring:nth-child(2) { width: 200px; height: 200px; animation-delay: 0.5s; }
+        .wave-ring:nth-child(3) { width: 300px; height: 300px; animation-delay: 1s; }
+        .wave-ring:nth-child(4) { width: 400px; height: 400px; animation-delay: 1.5s; }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeSlideUp 1s var(--ease-out-expo) 0.2s forwards;
+        }
+
+        .hero-tag-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero-tag-text {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 6vw, 90px);
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--white);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeSlideUp 1s var(--ease-out-expo) 0.4s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeSlideUp 1s var(--ease-out-expo) 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            opacity: 0;
+            animation: fadeSlideUp 1s var(--ease-out-expo) 0.8s forwards;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 32px;
+            background: var(--red);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(255,0,0,0.3);
+        }
+
+        .btn-primary svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Hero specific buttons */
+        .hero .btn-primary {
+            background: var(--white);
+            color: var(--red);
+        }
+
+        .hero .btn-primary:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 32px;
+            background: transparent;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            border: 2px solid rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 48px;
+            left: 48px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeSlideUp 1s var(--ease-out-expo) 1.2s forwards;
+            z-index: 2;
+        }
+
+        .scroll-line {
+            width: 60px;
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 100%;
+            background: var(--white);
+            animation: scrollRight 1.5s ease-in-out infinite;
+        }
+
+        @keyframes scrollRight {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(400%); }
+        }
+
+        /* ============================================
+           TRUST BAR
+        ============================================ */
+        .trust-bar {
+            background: var(--black);
+            padding: 48px;
+        }
+
+        .trust-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 64px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .trust-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-900);
+            border-radius: 50%;
+            border: 1px solid var(--gray-800);
+        }
+
+        .trust-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--red);
+        }
+
+        .trust-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        /* ============================================
+           SECTION STYLES
+        ============================================ */
+        .section {
+            padding: 120px 48px;
+        }
+
+        .section-dark {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .section-alt {
+            background: var(--off-white);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 8vw, 100px);
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+        }
+
+        .section-dark .section-title {
+            color: var(--white);
+        }
+
+        .section-subtitle {
+            max-width: 600px;
+            font-size: 18px;
+            color: var(--gray-500);
+            margin-top: 24px;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           IMPACT SECTION - ASYMMETRIC LAYOUT
+        ============================================ */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+
+        .impact-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--red);
+            transition: height 0.5s var(--ease-out-expo);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+
+        .impact-card:hover::before {
+            height: 100%;
+        }
+
+        .impact-card:nth-child(1) { grid-column: span 5; }
+        .impact-card:nth-child(2) { grid-column: span 7; }
+        .impact-card:nth-child(3) { grid-column: span 4; }
+        .impact-card:nth-child(4) { grid-column: span 4; }
+        .impact-card:nth-child(5) { grid-column: span 4; }
+
+        .impact-number {
+            font-family: var(--font-display);
+            font-size: 64px;
+            color: var(--gray-200);
+            line-height: 1;
+            margin-bottom: 24px;
+            transition: color 0.5s;
+        }
+
+        .impact-card:hover .impact-number {
+            color: var(--red);
+        }
+
+        .impact-card h3 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+        }
+
+        .impact-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray-600);
+        }
+
+        /* ============================================
+           METHOD SECTION - HORIZONTAL SCROLL
+        ============================================ */
+        .method-container {
+            display: flex;
+            gap: 2px;
+        }
+
+        .method-step {
+            flex: 1;
+            min-height: 500px;
+            padding: 48px;
+            background: var(--gray-900);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.6s var(--ease-out-expo);
+            cursor: pointer;
+        }
+
+        .method-step:hover {
+            flex: 2;
+            background: var(--red);
+        }
+
+        .method-step-number {
+            font-family: var(--font-display);
+            font-size: 120px;
+            color: var(--gray-800);
+            line-height: 1;
+            transition: color 0.6s;
+        }
+
+        .method-step:hover .method-step-number {
+            color: rgba(255,255,255,0.2);
+        }
+
+        .method-step-content {
+            opacity: 0.6;
+            transition: opacity 0.6s;
+        }
+
+        .method-step:hover .method-step-content {
+            opacity: 1;
+        }
+
+        .method-step h3 {
+            font-family: var(--font-display);
+            font-size: 36px;
+            letter-spacing: 0.05em;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .method-step p {
+            font-size: 15px;
+            color: var(--gray-400);
+            max-width: 280px;
+            transition: color 0.6s;
+        }
+
+        .method-step:hover p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ============================================
+           WHY TEXAA - FLOATING CARDS
+        ============================================ */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .why-card {
+            background: var(--gray-900);
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s var(--ease-out-expo);
+        }
+
+        .why-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .why-card:hover {
+            transform: scale(1.02);
+        }
+
+        .why-card:hover::after {
+            opacity: 1;
+        }
+
+        .why-card h3 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            letter-spacing: 0.03em;
+            color: var(--white);
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-card p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--gray-400);
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-cta {
+            margin-top: 64px;
+            text-align: center;
+        }
+
+        /* ============================================
+           MARKETS SECTION - GRID MASONRY
+        ============================================ */
+        .markets-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 64px;
+        }
+
+        .markets-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .market-card {
+            position: relative;
+            text-decoration: none;
+            display: block;
+            min-height: 320px;
+            overflow: hidden;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .market-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .market-card:hover .market-card-bg {
+            transform: scale(1.1);
+        }
+
+        .market-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+            transition: background 0.5s;
+        }
+
+        .market-card:hover .market-card-overlay {
+            background: linear-gradient(to top, var(--red) 0%, rgba(255,0,0,0.7) 50%, rgba(255,0,0,0.4) 100%);
+        }
+
+        .market-card-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .market-card h3 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            letter-spacing: 0.03em;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .market-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            transition: color 0.5s;
+        }
+
+        .market-card:hover p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .market-arrow {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .market-card:hover .market-arrow {
+            opacity: 1;
+            transform: translateX(0);
+            background: var(--white);
+        }
+
+        .market-arrow svg {
+            width: 24px;
+            height: 24px;
+            color: var(--white);
+            transition: color 0.5s;
+        }
+
+        .market-card:hover .market-arrow svg {
+            color: var(--red);
+        }
+
+        /* ============================================
+           ZONES SECTION
+        ============================================ */
+        .zones-grid {
+            display: flex;
+            gap: 16px;
+            margin-top: 64px;
+        }
+
+        .zone-card {
+            flex: 1;
+            padding: 40px 24px;
+            background: var(--gray-100);
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.5s var(--ease-out-expo);
+            position: relative;
+        }
+
+        .zone-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--red);
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .zone-card:hover {
+            background: var(--white);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .zone-card:hover::after {
+            left: 0;
+            width: 100%;
+        }
+
+        .zone-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.5s;
+        }
+
+        .zone-card:hover .zone-icon {
+            background: var(--red);
+            transform: scale(1.1);
+        }
+
+        .zone-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--gray-700);
+            transition: color 0.5s;
+        }
+
+        .zone-card:hover .zone-icon svg {
+            color: var(--white);
+        }
+
+        .zone-card h3 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            letter-spacing: 0.03em;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .zone-card p {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        /* ============================================
+           CONTACT SECTION - SPLIT LAYOUT
+        ============================================ */
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        .contact-left {
+            background: var(--black);
+            padding: 120px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-left .section-tag {
+            color: var(--red);
+        }
+
+        .contact-left .section-title {
+            color: var(--white);
+            font-size: clamp(48px, 6vw, 80px);
+        }
+
+        .contact-left .section-subtitle {
+            color: var(--gray-400);
+        }
+
+        .contact-benefits {
+            list-style: none;
+            margin-top: 48px;
+        }
+
+        .contact-benefits li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .contact-benefits svg {
+            width: 24px;
+            height: 24px;
+            color: var(--red);
+            flex-shrink: 0;
+        }
+
+        .contact-benefits span {
+            font-size: 15px;
+            color: var(--gray-300);
+        }
+
+        .contact-phone {
+            margin-top: 48px;
+            padding: 32px;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+        }
+
+        .contact-phone p {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-bottom: 12px;
+        }
+
+        .contact-phone a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-display);
+            font-size: 36px;
+            color: var(--red);
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .contact-phone a:hover {
+            transform: translateX(8px);
+        }
+
+        .contact-phone a svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .contact-right {
+            background: var(--white);
+            padding: 120px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-form h3 {
+            font-family: var(--font-display);
+            font-size: 36px;
+            letter-spacing: 0.03em;
+            margin-bottom: 8px;
+        }
+
+        .contact-form > p {
+            font-size: 15px;
+            color: var(--gray-500);
+            margin-bottom: 40px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 16px 20px;
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: var(--gray-800);
+            background: var(--gray-100);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            background: var(--white);
+            border-color: var(--red);
+        }
+
+        .form-group input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .form-group select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B6B6B'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 20px;
+        }
+
+        .form-submit {
+            margin-top: 32px;
+        }
+
+        .form-submit button {
+            width: 100%;
+            padding: 20px;
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .form-submit button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--red);
+            transition: left 0.5s var(--ease-out-expo);
+            z-index: 0;
+        }
+
+        .form-submit button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-submit button:hover::before {
+            left: 0;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-top: 20px;
+        }
+
+        /* ============================================
+           SAMPLES SECTION
+        ============================================ */
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .sample-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 48px 40px;
+            text-align: center;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .sample-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            border-color: var(--red);
+        }
+
+        .sample-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+            margin: 0 auto 24px;
+            transition: all 0.5s;
+        }
+
+        .sample-card:hover .sample-icon {
+            background: var(--red);
+        }
+
+        .sample-icon svg {
+            width: 36px;
+            height: 36px;
+            color: var(--red);
+            transition: color 0.5s;
+        }
+
+        .sample-card:hover .sample-icon svg {
+            color: var(--white);
+        }
+
+        .sample-card h3 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            letter-spacing: 0.03em;
+            margin-bottom: 12px;
+        }
+
+        .sample-card p {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .btn-outline-sm {
+            display: inline-block;
+            padding: 12px 24px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--red);
+            text-decoration: none;
+            border: 2px solid var(--red);
+            transition: all 0.3s;
+        }
+
+        .btn-outline-sm:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        /* ============================================
+           FAQ SECTION
+        ============================================ */
+        .faq-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+        }
+
+        .faq-header {
+            position: sticky;
+            top: 120px;
+            align-self: start;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--gray-100);
+            overflow: hidden;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .faq-item:hover {
+            background: var(--white);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 32px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--gray-900);
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--red);
+        }
+
+        .faq-question svg {
+            width: 20px;
+            height: 20px;
+            color: var(--gray-400);
+            transition: all 0.5s var(--ease-out-expo);
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-question svg {
+            transform: rotate(180deg);
+            color: var(--red);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s var(--ease-out-expo);
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 400px;
+        }
+
+        .faq-answer-inner {
+            padding: 0 32px 28px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--gray-600);
+        }
+
+        /* ============================================
+           FINAL CTA
+        ============================================ */
+        .final-cta {
+            background: var(--red);
+            padding: 120px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .final-cta .section-title {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            font-size: 20px;
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .final-cta-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 36px;
+            background: var(--white);
+            color: var(--red);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .btn-white:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .btn-white svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 36px;
+            background: transparent;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            border: 2px solid rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .footer {
+            background: var(--black);
+            padding: 64px 48px;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 36px;
+            letter-spacing: 0.1em;
+            color: var(--white);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--gray-500);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        /* ============================================
+           MOBILE STICKY CTA
+        ============================================ */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+        }
+
+        .mobile-cta a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 18px;
+            background: var(--red);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .mobile-cta svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 1200px) {
+            .markets-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .faq-container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .faq-header {
+                position: static;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 16px 24px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .hero-left {
+                padding: 140px 24px 80px;
+                min-height: 70vh;
+            }
+
+            .hero-right {
+                height: 50vh;
+            }
+
+            .hero-badge {
+                bottom: 24px;
+                right: 24px;
+            }
+
+            .section {
+                padding: 80px 24px;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-left,
+            .contact-right {
+                padding: 80px 24px;
+            }
+
+            .method-container {
+                flex-direction: column;
+            }
+
+            .method-step {
+                min-height: auto;
+                padding: 40px;
+            }
+
+            .method-step:hover {
+                flex: 1;
+            }
+
+            .impact-card {
+                grid-column: span 12 !important;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .zones-grid {
+                flex-wrap: wrap;
+            }
+
+            .zone-card {
+                flex: 1 1 calc(50% - 8px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-phone {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 0 24px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .hero-cta a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .trust-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .markets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .samples-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .final-cta-buttons {
+                flex-direction: column;
+            }
+
+            .final-cta-buttons a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 32px;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 24px;
+            }
+
+            .mobile-cta {
+                display: block;
+            }
+
+            body {
+                padding-bottom: 80px;
+            }
+
+            .cursor-follower {
+                display: none;
+            }
+
+            .zone-card {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .method-step-number {
+                font-size: 72px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cursor Follower -->
+    <div class="cursor-follower" id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">TEXAA</a>
+        <div class="nav-cta">
+            <a href="tel:+33556460163" class="nav-phone">05 56 46 01 63</a>
+            <a href="#contact" class="nav-btn">Demander un devis</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-left">
+            <div class="hero-pattern"></div>
+            <div class="hero-waves">
+                <div class="wave-ring"></div>
+                <div class="wave-ring"></div>
+                <div class="wave-ring"></div>
+                <div class="wave-ring"></div>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <span class="hero-tag-dot"></span>
+                    <span class="hero-tag-text">Fabricant français depuis 1987</span>
+                </div>
+
+                <h1 class="hero-title">
+                    RÉDUISEZ LA RÉVERBÉRATION DE VOS ESPACES
+                </h1>
+
+                <p class="hero-subtitle">
+                    Solutions acoustiques textiles pour bureaux, hôtels, restaurants, établissements de santé et espaces publics. Diagnostic, conception et accompagnement par nos experts.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="tel:+33556460163" class="btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        Parler à un expert
+                    </a>
+                    <a href="#echantillons" class="btn-outline">
+                        Demander des échantillons
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-scroll">
+                <div class="scroll-line"></div>
+                <span>Découvrir</span>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="hero-image"></div>
+            <div class="hero-image-overlay"></div>
+            <div class="hero-badge">
+                <span class="hero-badge-number">37+</span>
+                <span class="hero-badge-text">Ans d'expertise</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-inner">
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <span class="trust-text">Fabrication française</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                </div>
+                <span class="trust-text">Expertise technique</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <span class="trust-text">Accompagnement projet</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact Section -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Pourquoi agir</span>
+                <h2 class="section-title">UNE MAUVAISE<br>ACOUSTIQUE IMPACTE<br>VOTRE ACTIVITÉ</h2>
+            </div>
+
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-number">01</div>
+                    <h3>FATIGUE ET STRESS ACCRUS</h3>
+                    <p>L'exposition prolongée au bruit provoque une fatigue auditive et cognitive qui affecte le bien-être des occupants et leur productivité.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">02</div>
+                    <h3>PERTE DE CONCENTRATION</h3>
+                    <p>Les environnements réverbérants rendent difficile la concentration. Chaque interruption sonore nécessite un temps de récupération cognitif.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">03</div>
+                    <h3>INTELLIGIBILITÉ RÉDUITE</h3>
+                    <p>La réverbération excessive brouille la parole. Dans les salles de réunion, restaurants ou classes, les échanges deviennent difficiles.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">04</div>
+                    <h3>INCONFORT DES USAGERS</h3>
+                    <p>Clients, patients, élèves ou collaborateurs subissent l'inconfort acoustique. L'image de votre établissement peut en être affectée.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">05</div>
+                    <h3>CONTRAINTES RÉGLEMENTAIRES</h3>
+                    <p>Les normes acoustiques (code du travail, réglementation ERP, accessibilité) imposent des niveaux de performance à respecter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section class="section section-dark" style="padding: 0;">
+        <div class="section-header" style="padding: 120px 48px 64px;">
+            <div class="container">
+                <span class="section-tag">Notre approche</span>
+                <h2 class="section-title">UNE MÉTHODE<br>ÉPROUVÉE</h2>
+            </div>
+        </div>
+
+        <div class="method-container">
+            <div class="method-step">
+                <div class="method-step-number">01</div>
+                <div class="method-step-content">
+                    <h3>DIAGNOSTIC</h3>
+                    <p>Analyse de vos espaces, usage et contraintes acoustiques</p>
+                </div>
+            </div>
+            <div class="method-step">
+                <div class="method-step-number">02</div>
+                <div class="method-step-content">
+                    <h3>PRÉCONISATION</h3>
+                    <p>Recommandations techniques adaptées à vos objectifs</p>
+                </div>
+            </div>
+            <div class="method-step">
+                <div class="method-step-number">03</div>
+                <div class="method-step-content">
+                    <h3>CONCEPTION</h3>
+                    <p>Solutions sur-mesure intégrées à votre projet architectural</p>
+                </div>
+            </div>
+            <div class="method-step">
+                <div class="method-step-number">04</div>
+                <div class="method-step-content">
+                    <h3>RÉALISATION</h3>
+                    <p>Fabrication française et accompagnement à l'installation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Texaa Section -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Pourquoi Texaa</span>
+                <h2 class="section-title">L'EXPERTISE<br>ACOUSTIQUE FRANÇAISE<br>DEPUIS 1987</h2>
+                <p class="section-subtitle">Nous concevons et fabriquons des solutions acoustiques textiles qui allient performance technique et intégration architecturale.</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <h3>ATTÉNUATION MESURÉE</h3>
+                    <p>Nos produits sont testés en laboratoire. Nous fournissons les données d'absorption (αw, classement) pour dimensionner précisément votre traitement acoustique.</p>
+                </div>
+                <div class="why-card">
+                    <h3>SOLUTIONS POUR TOUS VOLUMES</h3>
+                    <p>Petits bureaux, grands open-spaces, halls, auditoriums : nos gammes couvrent l'ensemble des configurations et des surfaces à traiter.</p>
+                </div>
+                <div class="why-card">
+                    <h3>INTÉGRATION ARCHITECTURALE</h3>
+                    <p>Large choix de textures, coloris et formats. Nos solutions s'intègrent aux projets les plus exigeants, en neuf comme en rénovation.</p>
+                </div>
+                <div class="why-card">
+                    <h3>ACCOMPAGNEMENT TECHNIQUE</h3>
+                    <p>Nos experts vous conseillent sur le dimensionnement, le positionnement et le choix des produits adaptés à votre problématique.</p>
+                </div>
+            </div>
+
+            <div class="why-cta">
+                <a href="tel:+33556460163" class="btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    Échanger avec un expert : 05 56 46 01 63
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Markets Section -->
+    <section class="section" id="marches">
+        <div class="container">
+            <div class="markets-header">
+                <div>
+                    <span class="section-tag">Marchés</span>
+                    <h2 class="section-title">CHOISIR VOTRE<br>SECTEUR</h2>
+                </div>
+            </div>
+
+            <div class="markets-grid">
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2021/02/Texaa-panneaux-acoustiques-Stereo_amenagement-salles-coworking-citywork_02-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>ESPACES DE TRAVAIL</h3>
+                        <p>Open-spaces, bureaux, salles de réunion. Réduisez le bruit ambiant et favorisez la concentration.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2021/02/Texaa_panneaux-acoustiques-Stereo_Hotel-expo-Fornebu_01-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>ACCUEIL & RÉCEPTION</h3>
+                        <p>Halls, lobbies, espaces d'attente. Offrez une première impression sonore maîtrisée.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2020/12/Texaa_panneau-acoustique-stereo_amphitheatre-campuspernod-ricard-university_01-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>TECHNIQUE & SON</h3>
+                        <p>Studios, régies, auditoriums. Contrôlez précisément le comportement acoustique.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2021/02/Texaa_revetement-acoustique-Vibrasto_restaurant-le-petit-gus_01-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>RESTAURANT & HÔTELLERIE</h3>
+                        <p>Restaurants, bars, hôtels. Créez une ambiance sonore confortable.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2021/02/Texaa_panneaux-acoustiques-Stereo_Ecole-commerce-Kedge-buisness-school_00-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>ENSEIGNEMENT</h3>
+                        <p>Écoles, universités, centres de formation. Améliorez l'intelligibilité.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2021/01/Texaa_pannraux-acoustiques-Stereo_maison-des-arts-de-l-universite_Montaigne_04-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>CULTURE</h3>
+                        <p>Musées, bibliothèques, médiathèques. Préservez le calme et l'intelligibilité.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2021/02/Texaa_panneaux-acoustiques-stereo_aeroport-toulouse_01-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>TRANSPORT</h3>
+                        <p>Gares, aéroports, stations. Gérez l'acoustique des grands volumes.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2021/02/Texaa_rideaux-acoustiques_magasin-grand-audition_01-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>SANTÉ</h3>
+                        <p>Hôpitaux, cliniques, cabinets. Réduisez le stress sonore.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="market-card">
+                    <div class="market-card-bg" style="background-image: url('https://texaa.fr/wp-content/uploads/2021/02/Texaa_panneaux-acoustiques-Stereo_carre-des-services_01-1200x1200.jpg');"></div>
+                    <div class="market-card-overlay"></div>
+                    <div class="market-card-content">
+                        <h3>ÉQUIPEMENTS SPORTIFS</h3>
+                        <p>Gymnases, piscines, salles de sport. Maîtrisez la réverbération.</p>
+                    </div>
+                    <div class="market-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Zones -->
+            <div id="zones" style="margin-top: 120px;">
+                <div class="section-header">
+                    <span class="section-tag">Installation</span>
+                    <h2 class="section-title">CHOISIR VOTRE<br>ZONE</h2>
+                </div>
+
+                <div class="zones-grid">
+                    <a href="#" class="zone-card">
+                        <div class="zone-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                        </div>
+                        <h3>PLAFOND</h3>
+                        <p>Dalles, baffles et panneaux suspendus</p>
+                    </a>
+
+                    <a href="#" class="zone-card">
+                        <div class="zone-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                            </svg>
+                        </div>
+                        <h3>MUR</h3>
+                        <p>Panneaux et revêtements muraux</p>
+                    </a>
+
+                    <a href="#" class="zone-card">
+                        <div class="zone-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                            </svg>
+                        </div>
+                        <h3>DANS L'ESPACE</h3>
+                        <p>Îlots suspendus et totems</p>
+                    </a>
+
+                    <a href="#" class="zone-card">
+                        <div class="zone-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+                            </svg>
+                        </div>
+                        <h3>DEVANT VITRAGE</h3>
+                        <p>Solutions pour façades vitrées</p>
+                    </a>
+
+                    <a href="#" class="zone-card">
+                        <div class="zone-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                        </div>
+                        <h3>MOBILIER</h3>
+                        <p>Écrans, cloisons et mobilier acoustique</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-left">
+            <span class="section-tag">Votre projet</span>
+            <h2 class="section-title">DÉCRIVEZ VOTRE<br>BESOIN</h2>
+            <p class="section-subtitle">Obtenez une réponse personnalisée et des recommandations adaptées à votre projet acoustique.</p>
+
+            <ul class="contact-benefits">
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Analyse de votre problématique par un expert acousticien</span>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Préconisations techniques adaptées à votre espace</span>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Estimation budgétaire sans engagement</span>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Envoi d'échantillons pour validation matière et couleur</span>
+                </li>
+            </ul>
+
+            <div class="contact-phone">
+                <p>Vous préférez échanger directement ?</p>
+                <a href="tel:+33556460163">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    05 56 46 01 63
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-right">
+            <div class="contact-form">
+                <h3>ÊTRE RAPPELÉ</h3>
+                <p>Remplissez ce formulaire, nous vous recontactons sous 24h.</p>
+
+                <form action="#" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="market">Votre marché</label>
+                            <select id="market" name="market" required>
+                                <option value="">Sélectionner...</option>
+                                <option value="espaces-travail">Espaces de travail</option>
+                                <option value="accueil-reception">Accueil & réception</option>
+                                <option value="technique-son">Technique & son</option>
+                                <option value="restaurant-hotellerie">Restaurant & hôtellerie</option>
+                                <option value="enseignement">Enseignement</option>
+                                <option value="culture">Culture</option>
+                                <option value="transport">Transport</option>
+                                <option value="sante">Santé</option>
+                                <option value="sport">Équipements sportifs</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zone">Zone d'installation</label>
+                            <select id="zone" name="zone" required>
+                                <option value="">Sélectionner...</option>
+                                <option value="plafond">Plafond</option>
+                                <option value="mur">Mur</option>
+                                <option value="espace">Dans l'espace</option>
+                                <option value="vitrage">Devant vitrage</option>
+                                <option value="mobilier">Mobilier</option>
+                                <option value="multiple">Plusieurs zones</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surface">Surface estimée (m²)</label>
+                            <input type="text" id="surface" name="surface" placeholder="Ex: 150 m²">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeline">Échéance projet</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Sélectionner...</option>
+                                <option value="urgent">Sous 1 mois</option>
+                                <option value="court">1 à 3 mois</option>
+                                <option value="moyen">3 à 6 mois</option>
+                                <option value="long">Plus de 6 mois</option>
+                                <option value="etude">Étude / chiffrage</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Votre fonction</label>
+                            <select id="role" name="role">
+                                <option value="">Sélectionner...</option>
+                                <option value="architecte">Architecte</option>
+                                <option value="bureau-etude">Bureau d'études</option>
+                                <option value="maitre-ouvrage">Maître d'ouvrage</option>
+                                <option value="entreprise">Entreprise générale</option>
+                                <option value="amenageur">Aménageur / agenceur</option>
+                                <option value="prescripteur">Prescripteur</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Téléphone *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="06 XX XX XX XX" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="email">Email professionnel *</label>
+                            <input type="email" id="email" name="email" placeholder="votre@email.fr" required>
+                        </div>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit">
+                            <span>Être rappelé par un expert</span>
+                        </button>
+                    </div>
+
+                    <p class="form-note">En soumettant ce formulaire, vous acceptez d'être recontacté par Texaa.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Samples Section -->
+    <section class="section section-alt" id="echantillons">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Documentation</span>
+                <h2 class="section-title">COMMANDER DES<br>ÉCHANTILLONS</h2>
+                <p class="section-subtitle">Recevez gratuitement nos échantillons et documentation technique pour votre projet.</p>
+            </div>
+
+            <div class="samples-grid">
+                <div class="sample-card">
+                    <div class="sample-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                    </div>
+                    <h3>NUANCIER TEXTILE</h3>
+                    <p>Découvrez notre palette de coloris et textures pour vos projets acoustiques.</p>
+                    <a href="https://texaa.fr/echantillons/" class="btn-outline-sm">Commander</a>
+                </div>
+
+                <div class="sample-card">
+                    <div class="sample-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h3>BROCHURE TECHNIQUE</h3>
+                    <p>Documentation complète avec caractéristiques techniques et données d'absorption.</p>
+                    <a href="https://texaa.fr/echantillons/" class="btn-outline-sm">Télécharger</a>
+                </div>
+
+                <div class="sample-card">
+                    <div class="sample-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
+                    </div>
+                    <h3>COFFRET PRESCRIPTEUR</h3>
+                    <p>Échantillons physiques et documentation complète pour vos présentations clients.</p>
+                    <a href="https://texaa.fr/echantillons/" class="btn-outline-sm">Commander</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="faq-container">
+                <div class="faq-header">
+                    <span class="section-tag">FAQ</span>
+                    <h2 class="section-title">VOS QUESTIONS<br>SUR L'ACOUSTIQUE</h2>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question" type="button">
+                            Comment évaluer le traitement acoustique nécessaire ?
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Le dimensionnement d'un traitement acoustique dépend de plusieurs facteurs : le volume de l'espace, les matériaux existants (sols, murs, plafonds), l'usage prévu et le niveau de performance souhaité. Nos experts peuvent réaliser une analyse de votre projet et vous fournir des préconisations adaptées.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" type="button">
+                            Différence entre isolation et correction acoustique ?
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                L'isolation acoustique vise à bloquer la transmission du son entre deux espaces. La correction acoustique, spécialité de Texaa, consiste à traiter la qualité sonore à l'intérieur d'un espace en réduisant la réverbération et en améliorant l'intelligibilité.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" type="button">
+                            Vos solutions sont-elles adaptées aux ERP ?
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Oui, nos produits sont conçus pour répondre aux exigences des établissements recevant du public (ERP). Nous fournissons les fiches techniques et procès-verbaux nécessaires (réaction au feu, données acoustiques) pour la conformité de votre projet.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" type="button">
+                            Proposez-vous des solutions sur-mesure ?
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Oui, nous proposons une large palette de coloris et pouvons adapter les dimensions de nos produits à votre projet. Notre production française nous permet de répondre aux demandes spécifiques.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" type="button">
+                            Comment se déroule l'accompagnement projet ?
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Notre accompagnement comprend : l'analyse de votre problématique acoustique, la préconisation de solutions adaptées, l'aide au dimensionnement et au positionnement des produits, la fourniture de la documentation technique pour vos dossiers, et le suivi jusqu'à la livraison.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2 class="section-title">PRÊT À AMÉLIORER<br>L'ACOUSTIQUE ?</h2>
+            <p>Nos experts sont disponibles pour analyser votre projet et vous proposer des solutions adaptées.</p>
+
+            <div class="final-cta-buttons">
+                <a href="tel:+33556460163" class="btn-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    Appeler : 05 56 46 01 63
+                </a>
+                <a href="#contact" class="btn-ghost">
+                    Être rappelé par un expert
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">TEXAA</div>
+            <div class="footer-links">
+                <a href="https://texaa.fr">Site principal</a>
+                <a href="https://texaa.fr/echantillons/">Échantillons</a>
+                <a href="#">Mentions légales</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile CTA -->
+    <div class="mobile-cta">
+        <a href="tel:+33556460163">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            Appeler un expert
+        </a>
+    </div>
+
+    <script>
+        // Custom cursor
+        const cursor = document.getElementById('cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover effect on interactive elements
+        const hoverElements = document.querySelectorAll('a, button, .market-card, .zone-card, .impact-card, .why-card, .sample-card, .method-step');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                faqItems.forEach(i => i.classList.remove('open'));
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Reveal animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.impact-card, .why-card, .market-card, .zone-card, .sample-card, .faq-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
