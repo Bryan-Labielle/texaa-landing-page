@@ -50,33 +50,20 @@ const whyTexaaFeatures = [
 	},
 	{
 		number: "03",
-		title: "Adapté à tous les espaces",
-		description: "Restaurants, bureaux, hôtels, espaces publics… une solution pour chaque configuration."
-	},
-	{
-		number: "04",
 		title: "Production en France",
 		description: "Fabrication à Bordeaux. Délais maîtrisés, traçabilité assurée, flexibilité sur les commandes spécifiques et les teintes hors catalogue."
-	},
-	{
-		number: "05",
-		title: "Performances mesurées",
-		description: "Coefficients d'absorption (αw) mesurés selon ISO 354. Documentation complète et conformité réglementaire pour vos projets."
-	},
-	{
-		number: "06",
-		title: "Des données acoustiques fiables et exploitables",
-		description: "Performances mesurées, documentation complète, conformité réglementaire — toutes les données techniques pour vos CCTP et cahiers des charges."
 	}
 ];
 
 const trustedLogos = [
-	{ name: "SNCF", logo: "SNCF" },
-	{ name: "Airbus", logo: "AIRBUS" },
-	{ name: "Accor", logo: "ACCOR" },
-	{ name: "BNP Paribas", logo: "BNP" },
-	{ name: "Orange", logo: "ORANGE" },
-	{ name: "Carrefour", logo: "CARREFOUR" }
+	{ name: "Hermès", logo: "/logo/Hermes-Logo.png" },
+	{ name: "Syctom", logo: "/logo/sytcom-removebg-preview.png" },
+	{ name: "RATP", logo: "/logo/RATP.png" },
+	{ name: "SNCF", logo: "/logo/Logo_SNCF_(2011).svg" },
+	{ name: "Novotel", logo: "/logo/novotel logo.png" },
+	{ name: "LDLC Arena", logo: "/logo/ldlc logo.webp" },
+	{ name: "Ledger", logo: "/logo/ledger logo.png" },
+	{ name: "La République Française", logo: "/logo/logo république française.png" }
 ];
 
 const markets = [
@@ -121,14 +108,6 @@ const markets = [
 
 const faqs = [
 	{
-		question: "Comment évaluer le traitement acoustique nécessaire pour mon espace ?",
-		answer: "Le dimensionnement d'un traitement acoustique dépend de plusieurs facteurs : le volume de l'espace, les matériaux existants (sols, murs, plafonds), l'usage prévu et le niveau de performance souhaité. Nos experts peuvent réaliser une analyse de votre projet et vous fournir des préconisations adaptées. Contactez-nous avec les caractéristiques de votre espace pour obtenir une première estimation."
-	},
-	{
-		question: "Quelle est la différence entre isolation acoustique et correction acoustique ?",
-		answer: "L'isolation acoustique vise à bloquer la transmission du son entre deux espaces (empêcher le bruit de passer d'une pièce à l'autre). La correction acoustique, spécialité de Texaa, consiste à traiter la qualité sonore à l'intérieur d'un espace en réduisant la réverbération et en améliorant l'intelligibilité. Ce sont deux problématiques distinctes qui nécessitent des solutions différentes."
-	},
-	{
 		question: "Vos solutions sont-elles adaptées aux ERP et aux contraintes réglementaires ?",
 		answer: "Oui, nos produits sont conçus pour répondre aux exigences des établissements recevant du public (ERP). Nous fournissons les fiches techniques et procès-verbaux nécessaires (réaction au feu, données acoustiques) pour la conformité de votre projet. N'hésitez pas à nous consulter pour vérifier l'adéquation de nos solutions avec vos contraintes spécifiques."
 	},
@@ -144,14 +123,6 @@ const faqs = [
 		question: "Est-ce que l'installation nécessite de fermer mon établissement ?",
 		answer: "Non, la plupart de nos solutions se posent rapidement sans poussière ni nuisances majeures."
 	},
-	{
-		question: "Peut-on nettoyer les textiles ?",
-		answer: "Oui, le textile Aéro est conçu pour être aspiré ou lavé selon les modèles."
-	},
-	{
-		question: "Quels sont vos délais ?",
-		answer: "Nous sommes fabricants : nous maîtrisons notre chaîne de production pour vous livrer sous 4 à 6 semaines en moyenne."
-	}
 ];
 
 ---
@@ -220,9 +191,9 @@ const faqs = [
 						</div>
 						<div class="hero-trust-item">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
-							Performance certifiée
+							depuis 1979
 						</div>
 						<div class="hero-trust-item">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -250,7 +221,7 @@ const faqs = [
 			<div class="logo-banner-grid">
 				{trustedLogos.map((logo) => (
 					<div class="logo-banner-item">
-						<span>{logo.logo}</span>
+						<img src={logo.logo} alt={logo.name} />
 					</div>
 				))}
 			</div>
@@ -268,15 +239,6 @@ const faqs = [
 			</div>
 
 			<div class="impact-grid">
-				<div class="impact-card">
-					<div class="impact-icon">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
-						</svg>
-					</div>
-					<h3>Fatigue et stress accrus</h3>
-					<p>L'exposition prolongée au bruit provoque une fatigue auditive et cognitive qui affecte le bien-être des occupants et leur productivité.</p>
-				</div>
 
 				<div class="impact-card">
 					<div class="impact-icon">
@@ -296,16 +258,6 @@ const faqs = [
 					</div>
 					<h3>Intelligibilité réduite</h3>
 					<p>La réverbération excessive brouille la parole. Dans les salles de réunion, restaurants ou classes, les échanges deviennent difficiles.</p>
-				</div>
-
-				<div class="impact-card">
-					<div class="impact-icon">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-						</svg>
-					</div>
-					<h3>Inconfort des usagers</h3>
-					<p>Clients, patients, élèves ou collaborateurs subissent l'inconfort acoustique. L'image de votre établissement peut en être affectée.</p>
 				</div>
 
 				<div class="impact-card">
@@ -428,15 +380,6 @@ const faqs = [
 					<span class="why-label">Pourquoi Texaa</span>
 					<h2>L'expertise d'un atelier français depuis 1979</h2>
 
-					<div class="why-highlight">
-						<span class="why-highlight-icon">
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-							</svg>
-						</span>
-						<p>Nos produits sont faits pour durer toute la vie de votre bâtiment.</p>
-					</div>
-
 					<div class="why-features">
 						{whyTexaaFeatures.map((feature) => (
 							<div class="why-feature">
@@ -466,10 +409,10 @@ const faqs = [
 				</div>
 
 				<div class="why-image">
-					<img src="/images/ref le tronquay.jpg" alt="Réalisation Texaa - Traitement acoustique" loading="lazy" />
+					<img src="/images/hall_hopital_arnaud_de_villeneuve_carre.jpg" alt="Réalisation Texaa - Traitement acoustique" loading="lazy" />
 					<div class="why-image-caption">
 						<span class="why-image-label">Réalisation</span>
-						<p>Château Fleurial — Traitement acoustique plafond, intégration sur mesure dans un contexte architectural exigeant.</p>
+						<p>Hall de l'hôpital Arnaud de Villeneuve — Traitement acoustique plafond, intégration sur mesure dans un contexte architectural exigeant.</p>
 					</div>
 				</div>
 			</div>
@@ -598,32 +541,61 @@ const faqs = [
 			<div class="heritage-header">
 				<h2>Plus qu'une solution, un patrimoine industriel au service de vos espaces</h2>
 			</div>
-			<div class="heritage-grid">
-				<div class="heritage-left">
-					<div class="heritage-epv">
-						<img src="/images/Logo-epv.png" alt="Label Entreprise du Patrimoine Vivant" class="heritage-epv-logo" />
+
+			<div class="heritage-main">
+				<div class="heritage-visual">
+					<img src="/images/231024_TEXAA_©I.Mathie_0901-1200x1200.jpg" alt="Atelier Texaa - Savoir-faire artisanal" loading="lazy" />
+					<div class="heritage-visual-badge">
+						<img src="/images/Logo-epv.png" alt="Label EPV" />
+					</div>
+				</div>
+
+				<div class="heritage-content">
+					<div class="heritage-epv-text">
 						<h3>Labellisée Entreprise du Patrimoine Vivant (EPV)</h3>
 						<p>Texaa est reconnue par l'État pour son savoir-faire artisanal et industriel d'excellence. En choisissant Texaa, vous soutenez une fabrication française de haute technicité, héritée de 40 ans d'innovation textile près de Bordeaux.</p>
 					</div>
-					<div class="heritage-images">
-						<img src="/images/231024_TEXAA_©I.Mathie_0901-1200x1200.jpg" alt="Atelier Texaa - Savoir-faire artisanal" loading="lazy" />
-						<img src="/images/231024_TEXAA_photo-I.Mathie_0677-1200x1200.jpg" alt="Fabrication Texaa - Excellence française" loading="lazy" />
+
+					<div class="heritage-features">
+						<div class="heritage-feature">
+							<div class="heritage-feature-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+								</svg>
+							</div>
+							<div>
+								<h4>Conçu pour durer (vraiment)</h4>
+								<p>Panneaux déhoussables, lavables et réparables.</p>
+							</div>
+						</div>
+						<div class="heritage-feature">
+							<div class="heritage-feature-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+								</svg>
+							</div>
+							<div>
+								<h4>Santé & Sécurité</h4>
+								<p>Classement A+ qualité de l'air, normes incendie M1.</p>
+							</div>
+						</div>
+						<div class="heritage-feature">
+							<div class="heritage-feature-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+								</svg>
+							</div>
+							<div>
+								<h4>Engagement Circulaire</h4>
+								<p>Matières recyclées, pièces disponibles 10 ans minimum.</p>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="heritage-durability">
-					<div class="heritage-item">
-						<h4>Conçu pour durer (vraiment)</h4>
-						<p>Contrairement aux mousses acoustiques classiques qui s'effritent, nos panneaux sont déhoussables, lavables et réparables.</p>
-					</div>
-					<div class="heritage-item">
-						<h4>Santé & Sécurité</h4>
-						<p>Classement A+ pour la qualité de l'air intérieur et conformité stricte aux normes incendie (M1).</p>
-					</div>
-					<div class="heritage-item">
-						<h4>Engagement Circulaire</h4>
-						<p>Nous intégrons des matières recyclées et garantissons la disponibilité des pièces de rechange pour 10 ans minimum.</p>
-					</div>
-				</div>
+			</div>
+
+			<div class="heritage-gallery">
+				<img src="/images/231024_TEXAA_photo-I.Mathie_0677-1200x1200.jpg" alt="Fabrication Texaa - Excellence française" loading="lazy" />
 			</div>
 		</div>
 	</section>
@@ -704,55 +676,6 @@ const faqs = [
 							<div class="form-group full-width">
 								<label for="email">Email professionnel *</label>
 								<input type="email" id="email" name="email" placeholder="vous@entreprise.fr" required>
-							</div>
-
-							<div class="form-group">
-								<label for="market">Votre marché</label>
-								<select id="market" name="market">
-									<option value="">Sélectionner...</option>
-									<option value="espaces-travail">Espaces de travail</option>
-									<option value="accueil-reception">Accueil & réception</option>
-									<option value="technique-son">Technique & son</option>
-									<option value="restaurant-hotellerie">Restaurant & hôtellerie</option>
-									<option value="enseignement">Enseignement</option>
-									<option value="culture">Culture</option>
-									<option value="sante">Santé</option>
-									<option value="autre">Autre</option>
-								</select>
-							</div>
-
-							<div class="form-group">
-								<label for="zone">Zone d'intervention</label>
-								<select id="zone" name="zone">
-									<option value="">Sélectionner...</option>
-									<option value="france">France métropolitaine</option>
-									<option value="dom-tom">DOM-TOM</option>
-									<option value="europe">Europe</option>
-									<option value="international">International</option>
-								</select>
-							</div>
-
-							<div class="form-group">
-								<label for="surface">Surface approximative</label>
-								<select id="surface" name="surface">
-									<option value="">Sélectionner...</option>
-									<option value="moins-50">Moins de 50 m²</option>
-									<option value="50-150">50 à 150 m²</option>
-									<option value="150-500">150 à 500 m²</option>
-									<option value="plus-500">Plus de 500 m²</option>
-								</select>
-							</div>
-
-							<div class="form-group">
-								<label for="timeline">Échéance du projet</label>
-								<select id="timeline" name="timeline">
-									<option value="">Sélectionner...</option>
-									<option value="urgent">Sous 1 mois</option>
-									<option value="court">1 à 3 mois</option>
-									<option value="moyen">3 à 6 mois</option>
-									<option value="long">Plus de 6 mois</option>
-									<option value="etude">Étude / chiffrage</option>
-								</select>
 							</div>
 
 							<div class="form-group full-width">
