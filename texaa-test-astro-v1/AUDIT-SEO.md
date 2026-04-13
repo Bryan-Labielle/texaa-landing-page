@@ -29,16 +29,18 @@
 | HTML sémantique / a11y | 🟢 Résolu | `<nav>` ajouté, liens morts corrigés, accordéon `<details>` natif |
 | Conformité RGPD / cookies | 🟢 Résolu | Axeptio déjà actif via GTM du client (project ID `66978a322409f46d017ecfb2`) |
 | Mentions légales / Politique conf. | 🟠 En attente | Bloqué par les infos légales à fournir par le client |
-| Formulaire de lead | 🟠 En attente | HubSpot Free recommandé — bloqué par `portalId`/`formId` |
+| Formulaire de lead | 🟢 Résolu | Form custom + handler JS → webhook Make (attente URL webhook réelle) |
+| Page `/merci` | 🟢 Résolu | Page de confirmation créée, GTM + noindex en place |
+| Responsive mobile / tablette | 🟢 Résolu | Boutons, sections, logos, formulaire ajustés pour ≤1024px et ≤768px |
 | Tags SEO classiques | 🟡 Secondaire | Peu d'impact pour Google Ads, `noindex` déjà en place |
 
-### Top 5 actions prioritaires
+### Top 5 actions initiales — toutes résolues
 
-1. **Garder uniquement le Hero C**, supprimer A/B/D + tous les séparateurs « FIN PROPOSITION X »
-2. **Optimiser toutes les images** : redimensionner + convertir en WebP/AVIF + ajouter `width`/`height`
-3. **Installer GTM `GTM-WJ4ZGGSN`** dans `Layout.astro` (head + body)
-4. **Ajouter `<meta name="robots" content="noindex,follow">`** + créer pages Mentions légales / Politique de confidentialité
-5. **Renommer toutes les images** (supprimer espaces, accents, caractères spéciaux)
+1. ~~Garder uniquement le Hero C, supprimer A/B/D + séparateurs~~ ✅
+2. ~~Optimiser toutes les images (WebP responsive + `width`/`height`)~~ ✅
+3. ~~Installer GTM `GTM-WJ4ZGGSN` (head + body)~~ ✅
+4. ~~Ajouter `noindex` + préparer pages Mentions légales~~ ✅ (noindex fait, mentions en attente infos client)
+5. ~~Renommer toutes les images (kebab-case ASCII)~~ ✅
 
 ---
 
