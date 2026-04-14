@@ -179,12 +179,15 @@ const {
 	}
 
 	.sticky-logo {
-		font-family: var(--font-display);
-		font-weight: 700;
-		font-size: 20px;
-		color: var(--gray-900);
+		display: flex;
+		align-items: center;
 		text-decoration: none;
-		letter-spacing: -0.02em;
+		color: var(--texaa-red);
+	}
+
+	.sticky-logo svg {
+		height: 28px;
+		width: auto;
 	}
 
 	.sticky-cta {
@@ -2033,12 +2036,14 @@ const {
 
 	.footer-logo {
 		display: inline-block;
-		font-family: var(--font-display);
-		font-weight: 700;
-		font-size: 28px;
-		color: var(--white);
 		text-decoration: none;
 		margin-bottom: 16px;
+		color: var(--white);
+	}
+
+	.footer-logo svg {
+		height: 32px;
+		width: auto;
 	}
 
 	.footer-tagline {
@@ -2402,6 +2407,10 @@ const {
 
 		.mobile-sticky-cta {
 			display: block;
+		}
+
+		.sticky-phone {
+			display: none;
 		}
 
 		body {
