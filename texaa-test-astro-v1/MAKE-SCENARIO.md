@@ -170,7 +170,7 @@ Juste après le webhook, ajouter un module **HTTP → Make a request** pour vér
 
 **Subject** : `Votre demande est bien reçue — Texaa`
 
-**Body (HTML)** :
+**Body (HTML)** — copier-coller tel quel dans Make, puis remplacer les variables via le sélecteur Make :
 
 ```html
 <!DOCTYPE html>
@@ -184,57 +184,35 @@ Juste après le webhook, ajouter un module **HTTP → Make a request** pour vér
     <tr>
       <td align="center">
         <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
-          <!-- Header -->
           <tr>
             <td style="background:#171717; padding:32px 40px; text-align:center;">
               <div style="font-size:22px; font-weight:700; color:#ffffff; letter-spacing:0.02em;">TEXAA</div>
               <div style="font-size:12px; color:#a3a3a3; margin-top:4px;">Fabricant français depuis 1979</div>
             </td>
           </tr>
-
-          <!-- Body -->
           <tr>
             <td style="padding:48px 40px 32px;">
               <div style="display:inline-block; padding:6px 14px; background:rgba(255,0,0,0.08); color:#FF0000; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; border-radius:100px; margin-bottom:20px;">Demande reçue</div>
-
-              <h1 style="margin:0 0 16px; font-size:28px; color:#171717; letter-spacing:-0.02em;">Merci {{1.firstname}}&nbsp;!</h1>
-
-              <p style="margin:0 0 16px; font-size:16px; line-height:1.6; color:#525252;">
-                Votre demande nous est bien parvenue. Un expert Texaa va étudier votre projet et vous recontactera dans les meilleurs délais.
-              </p>
-
-              <p style="margin:0 0 32px; font-size:16px; line-height:1.6; color:#525252;">
-                En attendant, vous pouvez nous joindre directement au <strong style="color:#171717;">05 56 46 01 63</strong> pour toute question.
-              </p>
-
-              <!-- Recap -->
+              <h1 style="margin:0 0 16px; font-size:28px; color:#171717; letter-spacing:-0.02em;">Merci {{1.firstname}} !</h1>
+              <p style="margin:0 0 16px; font-size:16px; line-height:1.6; color:#525252;">Votre demande nous est bien parvenue. Un expert Texaa va étudier votre projet et vous recontactera dans les meilleurs délais.</p>
+              <p style="margin:0 0 32px; font-size:16px; line-height:1.6; color:#525252;">En attendant, vous pouvez nous joindre directement au <strong style="color:#171717;">05 56 46 01 63</strong> pour toute question.</p>
               <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:10px; padding:20px 24px; margin-bottom:32px;">
                 <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:#737373; margin-bottom:12px;">Récapitulatif de votre demande</div>
-
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px; color:#404040;">
                   <tr><td style="padding:6px 0; width:140px; color:#737373;">Secteur</td><td style="padding:6px 0;">{{1.establishment_type}}</td></tr>
                   <tr><td style="padding:6px 0; color:#737373;">Ville</td><td style="padding:6px 0;">{{1.city}}</td></tr>
                   <tr><td style="padding:6px 0; color:#737373;">Téléphone</td><td style="padding:6px 0;">{{1.phone}}</td></tr>
-                  {{#if 1.documents}}
                   <tr><td style="padding:6px 0; color:#737373;">Documents</td><td style="padding:6px 0;">{{join(1.documents; ", ")}}</td></tr>
-                  {{/if}}
                 </table>
               </div>
-
-              <!-- CTA -->
               <div style="text-align:center;">
-                <a href="tel:+33556460163" style="display:inline-block; padding:14px 28px; background:#FF0000; color:#ffffff; text-decoration:none; font-weight:600; font-size:15px; border-radius:8px;">📞 05 56 46 01 63</a>
+                <a href="tel:+33556460163" style="display:inline-block; padding:14px 28px; background:#FF0000; color:#ffffff; text-decoration:none; font-weight:600; font-size:15px; border-radius:8px;">Appelez-nous : 05 56 46 01 63</a>
               </div>
             </td>
           </tr>
-
-          <!-- Footer -->
           <tr>
             <td style="background:#fafafa; padding:24px 40px; text-align:center; border-top:1px solid #e5e5e5;">
-              <div style="font-size:12px; color:#737373; line-height:1.6;">
-                Texaa — Solutions acoustiques textiles sur-mesure<br>
-                Bordeaux, France · <a href="https://texaa.fr" style="color:#FF0000; text-decoration:none;">texaa.fr</a>
-              </div>
+              <div style="font-size:12px; color:#737373; line-height:1.6;">Texaa — Solutions acoustiques textiles sur-mesure — Bordeaux, France</div>
             </td>
           </tr>
         </table>
@@ -247,9 +225,9 @@ Juste après le webhook, ajouter un module **HTTP → Make a request** pour vér
 
 ---
 
-### T2 — Email notification admin #1 (complet, avec tous les détails)
+### T2 — Email notification admin #1 (complet)
 
-**Subject** : `🔔 Nouveau lead — {{1.firstname}} {{1.lastname}} ({{1.establishment_type}})`
+**Subject** : `Nouveau lead — {{1.firstname}} {{1.lastname}} ({{1.establishment_type}})`
 
 **Body (HTML)** :
 
@@ -266,38 +244,27 @@ Juste après le webhook, ajouter un module **HTTP → Make a request** pour vér
       <td align="center">
         <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:12px; overflow:hidden;">
           <tr>
-            <td style="background:#FF0000; padding:24px 40px;">
-              <div style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.8);">Nouveau lead — solutions.texaa.fr</div>
+            <td style="background:#171717; padding:24px 40px;">
+              <div style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:#a3a3a3;">Nouveau lead — solutions.texaa.fr</div>
               <div style="font-size:22px; font-weight:700; color:#ffffff; margin-top:4px;">{{1.firstname}} {{1.lastname}}</div>
-              <div style="font-size:14px; color:rgba(255,255,255,0.9); margin-top:2px;">{{1.establishment_type}} · {{1.city}}</div>
+              <div style="font-size:14px; color:#a3a3a3; margin-top:2px;">{{1.establishment_type}} — {{1.city}}</div>
             </td>
           </tr>
-
           <tr>
             <td style="padding:32px 40px;">
               <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:#737373; margin-bottom:16px;">Coordonnées</div>
-
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px; color:#262626; margin-bottom:32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px; color:#262626; margin-bottom:24px;">
                 <tr><td style="padding:8px 0; width:160px; color:#737373;">Nom complet</td><td style="padding:8px 0;"><strong>{{1.firstname}} {{1.lastname}}</strong></td></tr>
-                <tr><td style="padding:8px 0; color:#737373;">Email</td><td style="padding:8px 0;"><a href="mailto:{{1.email}}" style="color:#FF0000;">{{1.email}}</a></td></tr>
-                <tr><td style="padding:8px 0; color:#737373;">Téléphone</td><td style="padding:8px 0;"><a href="tel:{{1.phone}}" style="color:#FF0000;">{{1.phone}}</a></td></tr>
+                <tr><td style="padding:8px 0; color:#737373;">Email</td><td style="padding:8px 0;"><a href="mailto:{{1.email}}" style="color:#262626;">{{1.email}}</a></td></tr>
+                <tr><td style="padding:8px 0; color:#737373;">Téléphone</td><td style="padding:8px 0;"><a href="tel:{{1.phone}}" style="color:#262626;">{{1.phone}}</a></td></tr>
                 <tr><td style="padding:8px 0; color:#737373;">Ville</td><td style="padding:8px 0;">{{1.city}}</td></tr>
                 <tr><td style="padding:8px 0; color:#737373;">Secteur</td><td style="padding:8px 0;"><strong>{{1.establishment_type}}</strong></td></tr>
               </table>
-
-              {{#if 1.comments}}
               <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:#737373; margin-bottom:8px;">Commentaires</div>
-              <div style="padding:16px; background:#fafafa; border-left:3px solid #FF0000; border-radius:4px; font-size:14px; line-height:1.6; color:#404040; margin-bottom:24px;">{{1.comments}}</div>
-              {{/if}}
-
-              {{#if 1.documents}}
+              <div style="padding:16px; background:#fafafa; border-left:3px solid #d4d4d4; border-radius:4px; font-size:14px; line-height:1.6; color:#404040; margin-bottom:24px;">{{1.comments}}</div>
               <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:#737373; margin-bottom:8px;">Documents demandés</div>
-              <div style="font-size:14px; color:#262626; margin-bottom:24px;">{{join(1.documents; " · ")}}</div>
-              {{/if}}
-
-              <div style="padding-top:24px; border-top:1px solid #e5e5e5; font-size:12px; color:#737373;">
-                Reçu le {{formatDate(1.submitted_at; "DD/MM/YYYY à HH:mm")}} · Source : {{1.source}}
-              </div>
+              <div style="font-size:14px; color:#262626; margin-bottom:24px;">{{join(1.documents; ", ")}}</div>
+              <div style="padding-top:24px; border-top:1px solid #e5e5e5; font-size:12px; color:#737373;">Source : {{1.source}}</div>
             </td>
           </tr>
         </table>
@@ -310,7 +277,7 @@ Juste après le webhook, ajouter un module **HTTP → Make a request** pour vér
 
 ---
 
-### T3 — Email notification admin #2 (synthétique, format court)
+### T3 — Email notification admin #2 (synthétique)
 
 **Subject** : `Nouveau lead solutions.texaa.fr — {{1.establishment_type}}`
 
@@ -319,26 +286,16 @@ Juste après le webhook, ajouter un module **HTTP → Make a request** pour vér
 ```
 Nouveau lead reçu depuis solutions.texaa.fr
 
-{{1.firstname}} {{1.lastname}}
-{{1.email}}
-{{1.phone}}
-{{1.city}} · Secteur : {{1.establishment_type}}
-
-{{#if 1.comments}}
-Commentaires :
-{{1.comments}}
-{{/if}}
-
-{{#if 1.documents}}
+Nom : {{1.firstname}} {{1.lastname}}
+Email : {{1.email}}
+Téléphone : {{1.phone}}
+Ville : {{1.city}}
+Secteur : {{1.establishment_type}}
+Commentaires : {{1.comments}}
 Documents demandés : {{join(1.documents; ", ")}}
-{{/if}}
-
----
-Reçu le {{formatDate(1.submitted_at; "DD/MM/YYYY à HH:mm")}}
-Voir tous les leads dans Google Sheets : [lien vers le Sheet]
 ```
 
-> 💡 Le template T3 est volontairement **plus court** que T2. Utilité type : notification rapide sur le téléphone d'un responsable, copie pour archivage CRM, ou alerte sur un canal Slack/Teams (Make peut aussi pousser sur Slack si le client préfère).
+> T3 est volontairement court — notification rapide pour le 2e admin.
 
 ---
 

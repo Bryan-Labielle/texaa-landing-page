@@ -727,6 +727,7 @@ const faqs = [
 					<p class="form-subtitle">Recevez notre catalogue d'échantillons ou demandez un rappel pour discuter de votre projet avec un expert.</p>
 
 					<form id="leadForm">
+						<input type="hidden" id="gclid" name="gclid" value="">
 						<div class="form-grid">
 							<div class="form-group">
 								<label for="lastname">Nom <span class="form-required" aria-hidden="true">*</span></label>
@@ -944,6 +945,14 @@ const faqs = [
 	const RECAPTCHA_SITE_KEY = '6LfdGbcsAAAAABOVbZdqS0NTIqEw-Y1GGUq-YNtf';
 	const leadForm = document.getElementById('leadForm') as HTMLFormElement | null;
 
+	// Capture du gclid depuis l'URL (?gclid=XXX) et stockage dans le champ caché
+	const gclidField = document.getElementById('gclid') as HTMLInputElement | null;
+	const urlParams = new URLSearchParams(window.location.search);
+	const gclid = urlParams.get('gclid') || '';
+	if (gclidField && gclid) {
+		gclidField.value = gclid;
+	}
+
 	// Validation helpers
 	function trim(val: FormDataEntryValue | null): string {
 		return (val as string || '').trim();
@@ -1052,6 +1061,7 @@ const faqs = [
 					email,
 					comments,
 					documents,
+					gclid: gclidField?.value || '',
 					recaptcha_token: recaptchaToken,
 					submitted_at: new Date().toISOString(),
 					source: 'solutions.texaa.fr',
