@@ -730,12 +730,12 @@ const faqs = [
 						<div class="form-grid">
 							<div class="form-group">
 								<label for="lastname">Nom <span class="form-required" aria-hidden="true">*</span></label>
-								<input type="text" id="lastname" name="lastname" placeholder="Votre nom" required>
+								<input type="text" id="lastname" name="lastname" placeholder="Votre nom" required autocomplete="family-name">
 							</div>
 
 							<div class="form-group">
 								<label for="firstname">Prénom <span class="form-required" aria-hidden="true">*</span></label>
-								<input type="text" id="firstname" name="firstname" placeholder="Votre prénom" required>
+								<input type="text" id="firstname" name="firstname" placeholder="Votre prénom" required autocomplete="given-name">
 							</div>
 
 							<div class="form-group full-width">
@@ -758,17 +758,17 @@ const faqs = [
 
 							<div class="form-group">
 								<label for="city">Ville <span class="form-required" aria-hidden="true">*</span></label>
-								<input type="text" id="city" name="city" placeholder="Votre ville" required>
+								<input type="text" id="city" name="city" placeholder="Votre ville" required autocomplete="address-level2">
 							</div>
 
 							<div class="form-group">
 								<label for="phone">Téléphone <span class="form-required" aria-hidden="true">*</span></label>
-								<input type="tel" id="phone" name="phone" placeholder="06 XX XX XX XX" required>
+								<input type="tel" id="phone" name="phone" placeholder="06 XX XX XX XX" required autocomplete="tel">
 							</div>
 
 							<div class="form-group full-width">
 								<label for="email">Email professionnel <span class="form-required" aria-hidden="true">*</span></label>
-								<input type="email" id="email" name="email" placeholder="vous@entreprise.fr" required>
+								<input type="email" id="email" name="email" placeholder="vous@entreprise.fr" required autocomplete="email">
 							</div>
 
 							<div class="form-group full-width">
@@ -939,9 +939,42 @@ const faqs = [
 		});
 	});
 
-	// Lead form submission → Make webhook
-	const WEBHOOK_URL = 'https://hook.eu1.make.com/REPLACE_ME_WITH_REAL_WEBHOOK_ID';
+	// Lead form — config
+	const WEBHOOK_URL = 'https://hook.eu1.make.com/ccd1wp8b3g1b6d3df7b7mm8cvjgpx2sh';
+	const RECAPTCHA_SITE_KEY = '6LfdGbcsAAAAABOVbZdqS0NTIqEw-Y1GGUq-YNtf';
 	const leadForm = document.getElementById('leadForm') as HTMLFormElement | null;
+
+	// Validation helpers
+	function trim(val: FormDataEntryValue | null): string {
+		return (val as string || '').trim();
+	}
+
+	function isValidEmail(email: string): boolean {
+		return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+	}
+
+	function isValidPhone(phone: string): boolean {
+		const digits = phone.replace(/[\s.\-()+ ]/g, '');
+		return digits.length >= 10;
+	}
+
+	function showFieldError(field: HTMLElement | null, msg: string) {
+		if (!field) return;
+		field.classList.add('has-error');
+		let errEl = field.querySelector('.field-error') as HTMLElement | null;
+		if (!errEl) {
+			errEl = document.createElement('span');
+			errEl.className = 'field-error';
+			errEl.setAttribute('role', 'alert');
+			field.appendChild(errEl);
+		}
+		errEl.textContent = msg;
+	}
+
+	function clearFieldErrors() {
+		leadForm?.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
+		leadForm?.querySelectorAll('.field-error').forEach(el => el.remove());
+	}
 
 	if (leadForm) {
 		const submitBtn = leadForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
@@ -951,26 +984,79 @@ const faqs = [
 			e.preventDefault();
 			if (!submitBtn) return;
 
+			// Reset erreurs
+			clearFieldErrors();
+			errorBox?.classList.remove('is-visible');
+
+			// Collecte + nettoyage
 			const formData = new FormData(leadForm);
-			const payload = {
-				lastname: formData.get('lastname'),
-				firstname: formData.get('firstname'),
-				establishment_type: formData.get('establishment_type'),
-				city: formData.get('city'),
-				phone: formData.get('phone'),
-				email: formData.get('email'),
-				comments: formData.get('comments') || '',
-				documents: formData.getAll('documents'),
-				submitted_at: new Date().toISOString(),
-				source: 'solutions.texaa.fr',
-			};
+			const lastname = trim(formData.get('lastname'));
+			const firstname = trim(formData.get('firstname'));
+			const establishment_type = trim(formData.get('establishment_type'));
+			const city = trim(formData.get('city'));
+			const phone = trim(formData.get('phone'));
+			const email = trim(formData.get('email'));
+			const comments = trim(formData.get('comments'));
+			const documents = formData.getAll('documents') as string[];
+
+			// Validation
+			let hasError = false;
+
+			if (lastname.length < 2) {
+				showFieldError(document.getElementById('lastname')?.closest('.form-group') || null, 'Veuillez renseigner votre nom');
+				hasError = true;
+			}
+			if (firstname.length < 2) {
+				showFieldError(document.getElementById('firstname')?.closest('.form-group') || null, 'Veuillez renseigner votre prénom');
+				hasError = true;
+			}
+			if (!establishment_type) {
+				showFieldError(document.getElementById('establishment_type')?.closest('.form-group') || null, 'Veuillez sélectionner un type d\'établissement');
+				hasError = true;
+			}
+			if (city.length < 2) {
+				showFieldError(document.getElementById('city')?.closest('.form-group') || null, 'Veuillez renseigner votre ville');
+				hasError = true;
+			}
+			if (!isValidPhone(phone)) {
+				showFieldError(document.getElementById('phone')?.closest('.form-group') || null, 'Numéro de téléphone invalide (10 chiffres minimum)');
+				hasError = true;
+			}
+			if (!isValidEmail(email)) {
+				showFieldError(document.getElementById('email')?.closest('.form-group') || null, 'Adresse email invalide');
+				hasError = true;
+			}
+
+			if (hasError) return;
 
 			// UI : état chargement
 			submitBtn.classList.add('is-loading');
 			submitBtn.disabled = true;
-			errorBox?.classList.remove('is-visible');
 
 			try {
+				// reCAPTCHA v3 — récupération du token
+				let recaptchaToken = '';
+				try {
+					recaptchaToken = await (window as any).grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_lead' });
+				} catch {
+					// Si reCAPTCHA échoue (bloqué, timeout), on envoie quand même sans token
+					// Make décidera de traiter ou non
+				}
+
+				const payload = {
+					lastname,
+					firstname,
+					establishment_type,
+					city,
+					phone,
+					email,
+					comments,
+					documents,
+					recaptcha_token: recaptchaToken,
+					submitted_at: new Date().toISOString(),
+					source: 'solutions.texaa.fr',
+				};
+
 				const response = await fetch(WEBHOOK_URL, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -983,7 +1069,7 @@ const faqs = [
 
 				// Succès : redirection vers la page de remerciement
 				window.location.href = '/merci';
-			} catch (err) {
+			} catch {
 				// Échec : on restaure le bouton et affiche le message d'erreur
 				submitBtn.classList.remove('is-loading');
 				submitBtn.disabled = false;

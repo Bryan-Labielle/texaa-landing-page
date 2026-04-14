@@ -1,6 +1,6 @@
 # Scénario Make — Formulaire lead `solutions.texaa.fr`
 
-> **Architecture** : Le formulaire du site fait un `fetch()` POST JSON vers un webhook Make. Make reçoit les données et exécute 4 actions en parallèle : email de confirmation au visiteur, 2 emails admin à des destinataires différents, et ajout d'une ligne dans Google Sheets.
+> **Architecture** : Le formulaire du site fait un `fetch()` POST JSON vers un webhook Make. Make vérifie le token reCAPTCHA v3, puis exécute 4 actions : email de confirmation au visiteur, 2 emails admin à des destinataires différents, et ajout d'une ligne dans Google Sheets.
 
 ---
 
@@ -9,13 +9,17 @@
 ```
 [Webhooks: Custom webhook]
            │
+           ▼
+[HTTP: Verify reCAPTCHA v3] ──score < 0.5──▶ [STOP — bot détecté]
+           │
+           ▼ (score >= 0.5 = humain)
            ├──▶ [Email: Confirmation visiteur]
            ├──▶ [Email: Notification admin #1]
            ├──▶ [Email: Notification admin #2]
            └──▶ [Google Sheets: Add a Row]
 ```
 
-Les 4 actions peuvent être configurées **en série** (plus sûr) ou **en parallèle via un Router** (plus rapide). Pour commencer, je recommande la **série** — c'est plus simple à déboguer.
+Les 4 actions après reCAPTCHA peuvent être configurées **en série** (plus sûr) ou **en parallèle via un Router** (plus rapide). Pour commencer, je recommande la **série** — c'est plus simple à déboguer.
 
 ---
 
@@ -31,6 +35,7 @@ Les 4 actions peuvent être configurées **en série** (plus sûr) ou **en paral
   "email": "marie.dupont@exemple.fr",
   "comments": "Je cherche une solution pour mon open-space de 200m²",
   "documents": ["nuancier", "brochure"],
+  "recaptcha_token": "03AGdBq24Pf...(long token)...",
   "submitted_at": "2026-04-11T17:40:00.000Z",
   "source": "solutions.texaa.fr"
 }
@@ -67,7 +72,38 @@ Le tableau peut être vide (aucun document coché) ou contenir 1 à 3 valeurs.
 5. Cliquer **Run once** dans Make pour le mettre en mode écoute
 6. Soumettre le formulaire sur le site pour que Make reçoive un premier payload (sert de "structure reference")
 
-### Étape 3.2 — Module Email #1 : Confirmation visiteur
+### Étape 3.2 — Module HTTP : Vérification reCAPTCHA v3
+
+Juste après le webhook, ajouter un module **HTTP → Make a request** pour vérifier le token reCAPTCHA.
+
+**Configuration du module HTTP** :
+- **URL** : `https://www.google.com/recaptcha/api/siteverify`
+- **Method** : POST
+- **Body type** : `application/x-www-form-urlencoded`
+- **Fields** :
+  - `secret` = `6LfdGbcsAAAAAKN4VclTWnL5xiSVacNSAaalQWLY`
+  - `response` = `{{1.recaptcha_token}}`
+
+**Réponse de Google** (JSON) :
+```json
+{
+  "success": true,
+  "score": 0.9,
+  "action": "submit_lead",
+  "hostname": "solutions.texaa.fr"
+}
+```
+
+**Ajouter un Filter** entre le module HTTP et le module Email #1 :
+- **Condition** : `{{2.data.score}}` **greater than or equal to** `0.5`
+- **Label** : "Score reCAPTCHA suffisant"
+
+→ Si le score est < 0.5 (probable bot), le scénario **s'arrête** et rien n'est envoyé. Le visiteur voit le message d'erreur côté front.
+
+**Cas où `recaptcha_token` est vide** (reCAPTCHA n'a pas pu charger côté visiteur) :
+- Ajouter une **2e route** dans un Router : si `{{1.recaptcha_token}}` est vide, laisser passer quand même (pour ne pas perdre de vrais leads dont le navigateur bloque reCAPTCHA). À toi de décider si tu acceptes ce cas ou non.
+
+### Étape 3.3 — Module Email #1 : Confirmation visiteur
 
 **Module à choisir** (au choix selon les besoins du client) :
 - **Gmail** (si le client a un Google Workspace)

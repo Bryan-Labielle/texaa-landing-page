@@ -55,6 +55,8 @@ const {
 		/>
 	)}
 
+	<!-- reCAPTCHA v3 -->
+	<script is:inline src="https://www.google.com/recaptcha/api.js?render=6LfdGbcsAAAAABOVbZdqS0NTIqEw-Y1GGUq-YNtf"></script>
 </head>
 <body>
 	<!-- Google Tag Manager (noscript) -->
@@ -1624,6 +1626,22 @@ const {
 		color: var(--gray-500);
 		margin-top: 16px;
 		line-height: 1.6;
+	}
+
+	/* Validation errors per field */
+	.form-group.has-error input,
+	.form-group.has-error select,
+	.form-group.has-error textarea {
+		border-color: var(--texaa-red);
+		background: rgba(255, 0, 0, 0.03);
+	}
+
+	.field-error {
+		display: block;
+		font-size: 12px;
+		color: var(--texaa-red);
+		margin-top: 4px;
+		font-weight: 500;
 	}
 
 	/* Custom select (chevron + placeholder gris) */
